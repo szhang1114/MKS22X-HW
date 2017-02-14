@@ -17,22 +17,36 @@ public class QueenBoard{
      */
 
     public void solve(){
-	//for(int r = 0; r < board.length; r ++){
-	//if(solveH){
-		
-	    
+	if(board.length == 1){
+	    board[0][0] = 1;
+	    solutionCount = 1;
+	}
+	if(board.length > 3){
+	    solveH(0);
+	}
     }
 
-    private boolean solveH(int col){
-	
+    private boolean solveH(int c){
+	if(c >= board.length){
+	    solutionCount ++;
+	    return true;
+	}
+
+	for(int r = 0 ; r < board.length; r ++){
+	    if( canPlace(r,c)){
+		addQueen(r,c);
+	        if( solveH(c + 1)){
+		    
+		    return true;
+		}
+		else removeQueen(r, c);
+		
+	    }
+	    
+	}
 	return false;
     }
-    private void updateBoard(){
-	for(int r = 0; r < board.length; r ++){
-	    for(int c = 0; c < board.length; c ++){
-		if(board[r][c] == 1){
-		    int fillC = c + 1;
-		    while(fillC < board[r].length()
+		
     
     /**
      *@return the number of solutions found, or -1 if the board was never solved.
@@ -45,16 +59,56 @@ public class QueenBoard{
      *and all nunbers that represent queens are replaced with 'Q' 
      *all others are displayed as underscores '_'
      */
+    private void clean(){
+	board = new int[board.length][board.length];
+    }
     private void addQueen(int r, int c){
+
+	
 	board[r][c] = 1;
+
+	int position = 1;
+	while(c + position  < board.length){
+	    board[r][c + position] = -1;
+	    if (r + position < board.length){
+		board[r + position][c] = -1;
+	    }
+	    if(r - position >= 0){
+		board[r - position][c + position] = -1;
+	    }
+	    if(r + position < board.length){
+		board[r + position][c + position] = -1;
+	    }
+	    position ++;
+	}
+
     }
 
     private void removeQueen(int r, int c){
 	board[r][c] = 0;
-    }
 
-    public void countSolutions(){
-	
+	int position = 1;
+	while(c + position  < board.length){
+	    board[r][c + position] = 0;
+	    if (r + position < board.length){
+		board[r + position][c] = 0;
+	    }
+	    if(r - position >= 0){
+		board[r - position][c + position] = 0;
+	    }
+	    if(r + position < board.length){
+		board[r + position][c + position] = 0;
+	    }
+	    position ++;
+	}
+
+    }
+    private boolean canPlace(int r, int c){
+	return board[r][c] == 0;
+    }
+			  
+    public int getSolutionCount(){
+	return 1;
     }
 
 
@@ -63,7 +117,11 @@ public class QueenBoard{
 	String out = "";
 	for(int r = 0; r < board.length; r ++){
 	    for(int c = 0; c < board.length; c ++){
-		out += board[r][c] + " ";
+		/*if(board[r][c] == 1){
+		out += "Q " ;
+		}
+		else out += "_ ";*/
+		out += board[r][c] + "  ";
 	    }
 	    out += "\n";
 	}
@@ -72,7 +130,8 @@ public class QueenBoard{
 
     public static void main(String[]args){
 	QueenBoard queenboard = new QueenBoard(6);
-	queenboard.addQueen(3, 5);
+	queenboard.solve();
+	//queenboard.addQueen(0,0);
 	System.out.println(queenboard);
     }
 }
