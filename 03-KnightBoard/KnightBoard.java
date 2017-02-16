@@ -16,15 +16,20 @@ public class KnightBoard{
     private boolean solveH(int row, int col, int level){
 	if(level > r * c){
 	    return true;
-
 	}
-	if(){
+	for(int rows = 0; rows < r; rows ++){
+	    
+	    
+
 	}
 	
 	return false;
     }
-    private boolean checkMoves(){
-	
+    private boolean checkMove(int row, int col){
+	if(board[row][col] != 0){
+	    return false;
+	}
+	return true;	    
     }
     public String toString(){
 	String out = "";
@@ -43,9 +48,6 @@ public class KnightBoard{
 
     public static void main(String[]args){
 	KnightBoard k = new KnightBoard(5, 5);
-	k.board[3][3] = 4;
-	k.board[4][3] = 14;
 	System.out.println(k);
     }
 }
-	
