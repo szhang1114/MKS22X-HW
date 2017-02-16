@@ -16,12 +16,16 @@ public class KnightBoard{
     private boolean solveH(int row, int col, int level){
 	if(level > r * c){
 	    return true;
+
 	}
-	if(
+	if(){
+	}
 	
 	return false;
     }
-
+    private boolean checkMoves(){
+	
+    }
     public String toString(){
 	String out = "";
 	    for(int row = 0; row < r; row ++){
