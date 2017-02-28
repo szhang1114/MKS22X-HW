@@ -116,7 +116,15 @@ public class QueenBoard{
 	return solutionCount;
 	
     }
-
+    
+    public void countSolutions(){
+	if(board.length == 1){
+	    solutionCount = 1;
+	}
+	if(board.length > 3){
+	    solutionCountH(0);
+	}
+    }
     public void clearBoard(){
 	for(int r = 0; r < board.length; r ++){
 	    for (int c = 0; c > board.length; c ++){
@@ -160,13 +168,15 @@ public class QueenBoard{
     }
 
     public static void main(String[]args){
-	QueenBoard queenboard = new QueenBoard(5);
+	QueenBoard queenboard = new QueenBoard(10);
 
 	//queenboard.addQueen(0,0);
 	queenboard.solve();
 
 	System.out.println(queenboard);
-	System.out.println(queenboard.getSolutionCount());
+	queenboard.countSolutions();
+	System.out.println(queenboard.solutionCount);
+	//System.out.println(queenboard.getSolutionCount());
 		
 	//QueenBoard b = new QueenBoard(7);
 	//b.solve();
