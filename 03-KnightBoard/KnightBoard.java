@@ -10,26 +10,33 @@ public class KnightBoard{
     }
 
     public void solve(){
-	 solveH(0, 0, 1);
+	if( solveH(0, 0, 1)){
+	    System.out.println("done");
+	}
+	else System.out.println("unable to solve");
     }
 
     private boolean solveH(int row, int col, int level){
 	if(level > r * c){
 	    return true;
 	}
-	for(int rows = 0; rows < r; rows ++){
-	    
-	    
-
-	}
-	
-	return false;
-    }
-    private boolean checkMove(int row, int col){
-	if(board[row][col] != 0){
+	//prevent out of bounds exceptions
+	if(row >= r || row < 0 || col >= c || col < 0){
 	    return false;
 	}
-	return true;	    
+	if(board[row][col] == 0){
+	    board[row][col] = level;
+	    if( solveH(row + 1, col + 2, level + 1) ||  solveH(row + 1, col - 2, level + 1)||
+		solveH(row - 1, col + 2, level + 1) ||  solveH(row - 1, col - 2, level + 1)||
+		solveH(row + 2, col + 1, level + 1) ||  solveH(row + 2, col - 1, level + 1)||
+		solveH(row - 2, col + 1, level + 1) ||  solveH(row - 2, col - 1, level + 1)){
+		return true;
+	    }
+	    board[row][col] = 0;
+	}
+        
+		
+	return false;
     }
     public String toString(){
 	String out = "";
@@ -47,7 +54,11 @@ public class KnightBoard{
 
 
     public static void main(String[]args){
-	KnightBoard k = new KnightBoard(5, 5);
+	KnightBoard k = new KnightBoard(4, 4);
+	k.solve();
 	System.out.println(k);
+	KnightBoard l = new KnightBoard(7, 7);
+	l.solve();
+	System.out.println(l);
     }
 }
