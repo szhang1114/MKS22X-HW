@@ -8,15 +8,19 @@ public class Recursion{
 	if( n < 0){
 	    throw new IllegalArgumentException();
 	}
-	return sqrtHelper(n, 1);
+	if( n == 0){
+	    return n;
+	}
+	return sqrtH(n, 1);
     }
 
-    private static double sqrtHelper(double n, double guess){
+    private static double sqrtH(double n, double guess){
 	double betterGuess = (n / guess + guess) / 2;
 	if(closeEnough1(guess, betterGuess)){
 	    return betterGuess;
 	}
-        return sqrtHelper(n, betterGuess);
+
+        return sqrtH(n, betterGuess);
     }
 
 	
