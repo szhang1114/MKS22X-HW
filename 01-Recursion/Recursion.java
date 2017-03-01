@@ -13,14 +13,14 @@ public class Recursion{
 
     private static double sqrtHelper(double n, double guess){
 	double betterGuess = (n / guess + guess) / 2;
-	if(closeEnough(guess, betterGuess)){
+	if(closeEnough1(guess, betterGuess)){
 	    return betterGuess;
 	}
-	return sqrtHelper(n, betterGuess);
+        return sqrtHelper(n, betterGuess);
     }
 
 	
-    private static boolean closeEnough(double guess1, double guess2){
+    private static boolean closeEnough1(double guess1, double guess2){
 	if(guess1 - guess2 >= 0){
 	    return ((guess1 - guess2) / guess1 <= .0000000001);
 	}
@@ -28,11 +28,12 @@ public class Recursion{
     }
 
     public static void main(String[]args){
-	System.out.println(name());
-	System.out.println(sqrt(100));
-	System.out.println(sqrt(4));
-	System.out.println(sqrt(7));
-	System.out.println(sqrt(17));
-	System.out.println(sqrt(57));
+    	System.out.println(name());
+    	System.out.println(sqrt(1.0));
+    	System.out.println(Math.sqrt(7.0));
+    	System.out.println(sqrt(2.0));
+   	System.out.println(sqrt(4.0));
+    	System.out.println(sqrt(7.0));
+    	System.out.println(sqrt(100.0));
     }
 }
