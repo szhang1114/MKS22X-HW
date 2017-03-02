@@ -104,6 +104,7 @@ public class QueenBoard{
     }
 			  
     public int getSolutionCount(){
+	
 	if(board.length == 1){
 	    return 1;
 	}

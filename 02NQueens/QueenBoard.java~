@@ -17,6 +17,7 @@ public class QueenBoard{
      */
 
     public void solve(){
+	getSolutionCount();
 	if(board.length == 1){
 	    board[0][0] = 1;
 	    solutionCount = 1;
@@ -28,19 +29,17 @@ public class QueenBoard{
 
     private boolean solveH(int c){
 	if(c >= board.length){
-	    solutionCount ++;
+	    //solutionCount ++;
 	    return true;
 	}
 
 	for(int r = 0 ; r < board.length; r ++){
 	    if( canPlace(r,c)){
 		addQueen(r,c);
-	        if( solveH(c + 1)){
-		    
+	        if(solveH(c + 1)){
 		    return true;
 		}
-		else removeQueen(r, c);
-		
+		else removeQueen(r, c);	
 	    }
 	    
 	}
@@ -59,9 +58,6 @@ public class QueenBoard{
      *and all nunbers that represent queens are replaced with 'Q' 
      *all others are displayed as underscores '_'
      */
-    private void clean(){
-	board = new int[board.length][board.length];
-    }
     private void addQueen(int r, int c){
 
 	
@@ -69,15 +65,15 @@ public class QueenBoard{
 
 	int position = 1;
 	while(c + position  < board.length){
-	    board[r][c + position] = -1;
+	    board[r][c + position] --;
 	    if (r + position < board.length){
-		board[r + position][c] = -1;
+		board[r + position][c]  --;
 	    }
 	    if(r - position >= 0){
-		board[r - position][c + position] = -1;
+		board[r - position][c + position]  --;
 	    }
 	    if(r + position < board.length){
-		board[r + position][c + position] = -1;
+		board[r + position][c + position]  --;
 	    }
 	    position ++;
 	}
@@ -89,15 +85,15 @@ public class QueenBoard{
 
 	int position = 1;
 	while(c + position  < board.length){
-	    board[r][c + position] = 0;
+	    board[r][c + position]  ++;
 	    if (r + position < board.length){
-		board[r + position][c] = 0;
+		board[r + position][c]  ++;
 	    }
 	    if(r - position >= 0){
-		board[r - position][c + position] = 0;
+		board[r - position][c + position]  ++;
 	    }
 	    if(r + position < board.length){
-		board[r + position][c + position] = 0;
+		board[r + position][c + position]  ++;
 	    }
 	    position ++;
 	}
@@ -107,8 +103,45 @@ public class QueenBoard{
 	return board[r][c] == 0;
     }
 			  
-    public int getSolutionCount(){
-	return 1;
+    public int getSolutionCount(){		    
+	//	if(solutionCountH(0) == false){
+	//   return -1;
+	//	}
+	return solutionCount;
+	
+    }
+    
+    public void countSolutions(){
+	if(board.length == 1){
+	    solutionCount = 1;
+	}
+	if(board.length > 3){
+	    solutionCountH(0);
+	}
+    }
+    public void clearBoard(){
+	for(int r = 0; r < board.length; r ++){
+	    for (int c = 0; c > board.length; c ++){
+		board[r][c] = 0;
+	    }
+	}
+    }
+
+    private boolean solutionCountH(int c){
+	if(c >= board.length){
+	    solutionCount ++;
+	    return true;
+	}
+
+	for(int r = 0 ; r < board.length; r ++){
+	    if( canPlace(r,c)){
+		addQueen(r,c);
+	        solutionCountH(c + 1);
+		removeQueen(r, c);	
+	    }
+	    
+	}
+	return false;
     }
 
 
@@ -117,21 +150,29 @@ public class QueenBoard{
 	String out = "";
 	for(int r = 0; r < board.length; r ++){
 	    for(int c = 0; c < board.length; c ++){
-		/*if(board[r][c] == 1){
+		if(board[r][c] == 1){
 		out += "Q " ;
 		}
-		else out += "_ ";*/
-		out += board[r][c] + "  ";
-	    }
+		else out += "_ ";
+		    //out += board[r][c] + "  ";
+		    }
 	    out += "\n";
 	}
 	return out;
     }
 
     public static void main(String[]args){
-	QueenBoard queenboard = new QueenBoard(6);
-	queenboard.solve();
+	QueenBoard queenboard = new QueenBoard(5);
+
 	//queenboard.addQueen(0,0);
+	queenboard.solve();
+
 	System.out.println(queenboard);
+	queenboard.countSolutions();
+	System.out.println(queenboard.getSolutionCount());
+		
+	//QueenBoard b = new QueenBoard(7);
+	//b.solve();
+	//System.out.println(b);
     }
 }
