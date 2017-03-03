@@ -25,14 +25,10 @@ public class Maze{
 	    File infile = new File(filename);
 	    Scanner s = new Scanner(infile);
 	    int lineNumber = 0;
-	    int r = s.nextLine().length();
-	    int c = 0;
-	    while(s.hasNextLine()){
-		c ++;
-	    }
-	    maze = new char[r][c];
+	    maze = new char[100][100];
 	    while(s.hasNextLine()){
 		String line = s.nextLine();
+		System.out.println(line);
 		for(int counter = 0; counter < line.length(); counter ++){
 		    maze[lineNumber][counter] = line.charAt(counter);
 		}
@@ -115,7 +111,7 @@ public class Maze{
     
     public static void main(String [] args){
 	Maze m = new Maze("maze1.txt");
-	System.out.println(m);
+	//System.out.println(m);
     }
 
 }
