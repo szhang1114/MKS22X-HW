@@ -119,6 +119,7 @@ public class QueenBoard{
 	}
 	if(board.length > 3){
 	    countSolutionsH(0);
+	    clearBoard();
 	    count = true;
 	}
 	else{countSolutionsH(0);
