@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.io.FileNotFoundException;
 
 public class Maze{
     private char[][]maze;
@@ -20,6 +21,33 @@ public class Maze{
 
     public Maze(String filename){
         //COMPLETE CONSTRUCTOR
+	try{
+	    File infile = new File(filename);
+	    Scanner s = new Scanner(infile);
+	    int lineNumber = 0;
+	    maze = new char[100][100];
+	    while(s.hasNextLine()){
+		String line = s.nextLine();
+		System.out.println(line);
+		for(int counter = 0; counter < line.length(); counter ++){
+		    maze[lineNumber][counter] = line.charAt(counter);
+		}
+		lineNumber ++;
+	    }
+	}catch (FileNotFoundException e){
+	    System.out.println("File not found");
+	}
+    }
+    
+    public String toString(){
+	String out = "";
+	for(int r = 0; r < maze.length; r ++){
+	    for(int c = 0; c < maze[r].length; c ++){
+		out += maze[r][c];
+	    }
+	    out += "\n";
+	}
+	return out;
     }
 
     public void setAnimate(boolean b){
@@ -70,14 +98,20 @@ public class Maze{
     private boolean solve(int row, int col){
         if(animate){
             System.out.println("\033[2J\033[1;1H"+this);
-
-            wait(20);
+	    try{
+		wait(20);
+	    }catch (InterruptedException e){
+	    }
         }
 
         //COMPLETE SOLVE
 
         return false; //so it compiles
     }
-
+    
+    public static void main(String [] args){
+	Maze m = new Maze("maze1.txt");
+	//System.out.println(m);
+    }
 
 }
