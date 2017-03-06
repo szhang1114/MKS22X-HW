@@ -25,10 +25,17 @@ public class Maze{
 	    File infile = new File(filename);
 	    Scanner s = new Scanner(infile);
 	    int lineNumber = 0;
-	    maze = new char[100][100];
+	    int r = 1;
+	    int c = s.nextLine().length();
 	    while(s.hasNextLine()){
-		String line = s.nextLine();
-		System.out.println(line);
+		s.nextLine();
+		r ++;
+	    }
+	    maze = new char[r][c];
+	    File file = new File(filename);
+	    Scanner s2 = new Scanner(file);
+	    while(lineNumber < r){
+		String line = s2.nextLine();
 		for(int counter = 0; counter < line.length(); counter ++){
 		    maze[lineNumber][counter] = line.charAt(counter);
 		}
@@ -39,16 +46,7 @@ public class Maze{
 	}
     }
     
-    public String toString(){
-	String out = "";
-	for(int r = 0; r < maze.length; r ++){
-	    for(int c = 0; c < maze[r].length; c ++){
-		out += maze[r][c];
-	    }
-	    out += "\n";
-	}
-	return out;
-    }
+
 
     public void setAnimate(boolean b){
 
@@ -71,12 +69,13 @@ public class Maze{
       Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
     */
     public boolean solve(){
-            int startr=-1,startc=-1;
-
-            //Initialize starting row and startint col with the location of the S. 
-
-            maze[startr][startc] = ' ';//erase the S, and start solving!
-            return solve(startr,startc);
+        
+	int[] start = findStart();
+	int startr = start[0];
+	int startc = start[1];
+	//Initialize starting row and startint col with the location of the S.
+	maze[startr][startc] = ' ';//erase the S, and start solving!
+	return solve(startr,startc);
     }
 
     /*
@@ -90,28 +89,77 @@ public class Maze{
 
       Postcondition:
 
-        The S is replaced with '@' but the 'E' is not.
+      The S is replaced with '@' but the 'E' is not.
 
-        All visited spots that were not part of the solution are changed to '.'
-        All visited spots that are part of the solution are changed to '@'
+      All visited spots that were not part of the solution are changed to '.'
+      All visited spots that are part of the solution are changed to '@'
     */
     private boolean solve(int row, int col){
         if(animate){
             System.out.println("\033[2J\033[1;1H"+this);
-	    try{
-		wait(20);
-	    }catch (InterruptedException e){
-	    }
+
+	    wait(50);
+	    
         }
 
+	if(maze[row][col] == 'E'){
+	    System.out.println("maze complete!");
+	    return true;
+	}
+
+	if(maze[row][col] == '#'){
+	    return false;
+	}
+	if(maze[row][col]== ' ' || maze[row][col] == 'S'){
+	    maze[row][col] = '@';
+	    if(solve(row, col + 1) || solve(row + 1, col) || solve(row, col - 1) || solve(row - 1, col)){
+		return true;
+	    }
+	    maze[row][col] = '.';
+	}
+	
         //COMPLETE SOLVE
 
         return false; //so it compiles
     }
-    
+    private int[] findStart(){
+	int[] start = new int[2];
+	start[0] = -1;
+	for( int row = 0; row < maze.length; row ++){
+	    for ( int col = 0; col < maze[0].length; col ++){
+		if(maze[row][col] == 'S'){
+		    start[0] = row;
+		    start[1] = col;
+		}
+	    }
+	}
+	if(start[0] == -1){
+	    start[0] = -1;
+	    start[1] = -1;
+	}
+	return start;
+    }
+	
+    public String toString(){
+	String out = "";
+
+	for(int r = 0; r < maze.length; r ++){
+	    for(int c = 0; c < maze[r].length; c ++){
+		out += maze[r][c];
+	    }
+	    out += "\n";
+	}
+	return out;
+    }
+    private void wait (int millis){
+	try {
+	    Thread.sleep(millis);
+	}catch (InterruptedException e){
+	}
+    }
     public static void main(String [] args){
-	Maze m = new Maze("maze1.txt");
-	//System.out.println(m);
+	Maze m = new Maze("maze1.dat");
+	System.out.println(m);
     }
 
 }
