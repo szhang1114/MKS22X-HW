@@ -1,3 +1,4 @@
+import java.util.*;
 public class Mergesort{
     
     public static void mergesort(int[] ary){
@@ -68,14 +69,19 @@ public class Mergesort{
     public static void main(String[] args){
 	int[] a = {0, 2, 4, 6, 8, 10, 12, 100, 500, 600};
 	int[] b = {1, 3, 5, 7, 9, 11, 13};
-	int[] c = new int[50];
-	for(int i = 0; i < 50; i ++){
-	    c[i] = (int)(Math.random() * 100);
+	int[] c = new int[100000];
+	for(int i = 0; i < 100000; i ++){
+	    c[i] = (int)(Math.random() * 1000);
 	}
-	System.out.println(toString(c));
-	//System.out.println(toString(a));
-	//System.out.println(toString(b));
+	int[] d = new int[1000000];
+	for(int i = 0; i < 1000000; i ++){
+	    d[i] = i;
+	}
 	mergesort(c);
-	System.out.println(toString(c));
+	if(c == Arrays.sort(c)){
+	    System.out.println("true");
+	}
+
+	mergesort(d);
     }
 }
