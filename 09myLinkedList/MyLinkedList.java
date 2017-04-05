@@ -27,7 +27,14 @@ public class MyLinkedList{
 
     private void addAfter(LNode location, LNode toBeAdded){
     }
+    
+    private void remove(LNode target){
+    }
 
+    public int indexOf(int value){
+    }
+
+    public int remove
     public int size(){
 	return size;
     }
