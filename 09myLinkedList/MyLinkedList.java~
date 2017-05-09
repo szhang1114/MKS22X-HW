@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class MyLinkedList{
     private LNode start;
     private LNode end;
@@ -33,13 +31,10 @@ public class MyLinkedList{
     private void remove(LNode target){
     }
 
-    public int remove(int index){
-
-    }
-    
     public int indexOf(int value){
     }
 
+    public int remove
     public int size(){
 	return size;
     }
@@ -53,13 +48,7 @@ public class MyLinkedList{
 
     }
 
-    private LNode getNthNode(int index){
-
-    }
     public String toString(){
-	String out = "[";
-	LNode cur = start;
-	while(cur.next
 	return "";
     }
 

@@ -2,14 +2,32 @@ public class ExpressionTree{
   
     /*return the value of the specified expression tree*/
     public double evaluate(){
-	/*you are to write this method*/
-	return 0.0;
-	    }
-  
+	if(isValue()){
+	    return getValue();
+	}
+	else {
+	    return apply(getOp(), getLeft().evaluate(), getRight().evaluate());
+	}
+    }
+
+    private double apply(char op, double d1, double d2){
+	if(op == '+'){
+	    return d1 + d2;
+	}
+        if(op == '-'){
+	    return d1 - d2;
+	}
+	if(op == '*'){
+	    return d1 * d2;
+	}
+	if(op == '/'){
+	    return d1 / d2;
+	}
+	return d1 % d2;
+    }
     /*return the expression as an infix notation string with parenthesis*/
     /* The sample tree would be: "( 3 + (2 * 10))"     */
     public String toString(){
-	/*you are to write this method*/
 	String output = "";
 	if(isValue()){
 	    return getValue() + "";
@@ -23,7 +41,6 @@ public class ExpressionTree{
     /*return the expression as a postfix notation string without parenthesis*/
     /* The sample tree would be: "3 2 10 * +"     */
     public String toStringPostfix(){
-	/*you are to write this method*/
 	String output = "";
 	if(isValue()){
 	    return getValue() + "";
@@ -38,7 +55,6 @@ public class ExpressionTree{
     /* The sample tree would be: "+ 3 * 2 10"     */
   
     public String toStringPrefix(){
-	/*you are to write this method*/
 	String output = "";
 	if(isValue()){
 	    return getValue() + "";
