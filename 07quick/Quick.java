@@ -1,41 +1,81 @@
-public class Quick{
+import java.util.*;
 
-    public static int part(int[] data, int start, int end){
-	int range = end - start + 1;
-	int pivotIndex = (int)(Math.random() * range + start);
-	int pivot = data[pivotIndex];
-	System.out.println("pivot = " + pivot);
-	swap(data, pivotIndex, start);
-	int front = start + 1;
-	
-	for(int index = start + 1; index <= end; index ++){
-	    //System.out.println(outString(data));
-	    //System.out.println("front " + front );
-	    if(data[index] < pivot){
-		swap(data, front, index);
-		//System.out.println(outString(data));
-		front ++;
+public class Quick{
+    //Dutch flag methods
+    
+    public static int[] part(int[] data, int start, int end){
+	int index = (int)(Math.random() * (end - start + 1) + start);
+	int v = data[index];
+	swap(data, index, start);
+	int i = start;
+	int lt = start;
+	int gt = end;	
+	while(i <= gt){
+	    if(data[i] < v){
+		swap(data, i, lt);
+		i ++;
+		lt ++;
+	    }
+	    else if(data[i] > v){
+		swap(data, i, gt);
+		gt --;
+	    }
+	    else{
+		i ++;
 	    }
 	}
-	int finalPivotIndex = front - 1;
-	swap(data, start, finalPivotIndex);
-	return pivot;
+	int[] boundaries = new int[2];
+	boundaries[0] = lt;
+	boundaries[1] = gt;
+	return boundaries;
     }
+    
+    public static void quickSort(int[]ary){
+	quickSortH(ary, 0, ary.length - 1);
+    }
+
+    private static void quickSortH(int[] ary, int start, int end){
+	if(start < end){
+	    int[] ltgt = part(ary, start, end);
+	    int lt = ltgt[0];
+	    int gt = ltgt[1];
+	    quickSortH(ary, start, lt - 1);
+	    quickSortH(ary, gt + 1, end);
+	}
+    }
+    
+    public static int quickselect(int[]ary, int k){
+	return quickselectH(ary, k, 0, ary.length - 1);
+    }
+
+    public static int quickselectH(int[]ary, int k, int start, int end){
+        int[] ltgt = part(ary, start, end);
+	int lt = ltgt[0];
+	int gt = ltgt[1];
+	
+	if(k < lt){
+	    return quickselectH(ary, k, start, lt - 1);
+	}
+	else if(k > gt){
+	    return quickselectH(ary, k, gt + 1, end);
+	}
+	else return ary[lt];
+	
+    }
+
+
+    public static String toString(int[] ary){
+	String out = "[";
+	for(int i = 0; i < ary.length; i ++){
+	    out += ary[i] + ",";
+	}
+	
+	return out + "]";
+    }
+    
     private static void swap(int[] data, int oldIndex, int newIndex){
 	int oldInt = data[oldIndex];
 	data[oldIndex] = data[newIndex];
 	data[newIndex] = oldInt;
-    }
-    public static String outString(int[] data){
-	String out = "";
-	for(int i = 0; i < data.length; i ++){
-	    out += data[i] + " ";
-	}
-	return out;
-    }
-    public static void main(String[] args){
-	int[] ary = {10, 5, 1, 6, 9, 7, 2, 8, 3, 0, 4};
-	part(ary, 0, 10);
-	System.out.println(outString(ary));
     }
 }
