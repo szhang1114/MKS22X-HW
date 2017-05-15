@@ -2,6 +2,9 @@ import java.util.*;
 public class Merge{
     
     public static void mergesort(int[] ary){
+	if(ary.length == 0){
+	    return;
+	}
 	if(ary.length == 1){
 	}
 	else{
