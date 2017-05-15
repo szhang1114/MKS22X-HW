@@ -1,5 +1,5 @@
 import java.util.*;
-public class Mergesort{
+public class Merge{
     
     public static void mergesort(int[] ary){
 	if(ary.length == 1){
@@ -66,22 +66,12 @@ public class Mergesort{
 	}
 	return out += "]";
     }
-    public static void main(String[] args){
-	int[] a = {0, 2, 4, 6, 8, 10, 12, 100, 500, 600};
-	int[] b = {1, 3, 5, 7, 9, 11, 13};
-	int[] c = new int[100000];
-	for(int i = 0; i < 100000; i ++){
-	    c[i] = (int)(Math.random() * 1000);
-	}
-	int[] d = new int[1000000];
-	for(int i = 0; i < 1000000; i ++){
-	    d[i] = i;
-	}
-	mergesort(c);
-	if(c == Arrays.sort(c)){
-	    System.out.println("true");
-	}
-
-	mergesort(d);
+    public static void main(String[] args) {
+        int[] a = { 3,123,34,23,234,2341,123,12,3 };
+        int[] b = { 0, 2, 4, 6, 8 };
+        int[] destination = new int[a.length + b.length];
+        mergesort(a);
+        System.out.println(toString(a));
     }
+
 }
