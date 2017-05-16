@@ -3,13 +3,24 @@ public class MyDeque{
     private int front, back, size;
     
     public MyDeque(){
-	size = 1;
-	deque = new String[size];
+	deque = new String[1];
+	size = 0;
 	front = 0;
 	back = 0;	
     }
     public void addFirst(String s){
-	
+	if(s == null){
+	    throw new NullPointerException;
+	}
+	if(size == deque.length){
+	    resize();   
+	}
+	if(size == 0){
+	    size ++;
+	    deque[0] = s;
+	}	
+
+			      
     }
 
     public void addLast(String s){
@@ -24,19 +35,30 @@ public class MyDeque{
     }
 
     public String getFirst(){
-	return "";
+	if(size == 0){
+	    throw new NoSuchElementException();
+	}
+	return deque[front];
     }
 
     public String getLast(){
-	return "";
+	if(size == 0){
+	    throw new NoSuchElementException();
+	}
+	return deque[back];
     }
 
     public void resize(){
-	size *= 2;
+	if(size == 0){
+	    size = 2;
+	}
+	else{
+	    size *= 2;
+	}
 	String[] temp = new String[size];
 	for(int i = front; i < deque.length;  i ++){
-	    //if(i 
 	    temp[i] = deque[i];
 	}
+	deque = temp;
     }
 }
