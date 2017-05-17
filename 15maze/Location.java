@@ -18,25 +18,15 @@ public class Location implements Comparable<Location>{
 
     public int compareTo(Location other){
 	if(aStar){
+	    return (distToGoal + distToEnd) - (other.distToGoal + other.distToEnd);
 	}
-	return 0;
+	return distToEnd - other.distToEnd;
     }
 
-    public int get(char c){
-	if(c == 'r'){
-	    return row;
-	}
-	if(c == 'c'){
-	    return col;
-	}
-	if(c == 'S'){
-	    return distToStart;
-	}
-	if(c == 'G'){
-	    return distToGoal;
-	}
-	return 0;
+    public int getDist(Location other){
+	return Math.abs(row - other.row) + Math.abs(col - other.col);
     }
+	
     
     public Location prev(){
 	return previous;

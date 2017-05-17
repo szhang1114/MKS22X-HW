@@ -15,10 +15,25 @@ public class MazeSolver{
     }
 
     public void solve(int style){
+	//DFS
+	if(style == 0){
 
+	}
+	//BFS
+	if(style == 1){
+
+	}
+	//BestFirst
+	if(style == 2){
+
+	}
+	//A*
+	if(style == 3){
+
+	}
     }
 
     public String toString(){
-	return "";
+	return board;
     }
 }
