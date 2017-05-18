@@ -18,9 +18,9 @@ public class Location implements Comparable<Location>{
 
     public int compareTo(Location other){
 	if(aStar){
-	    return (distToGoal + distToEnd) - (other.distToGoal + other.distToEnd);
+	    return (distToGoal + distToStart) - (other.distToGoal + other.distToStart);
 	}
-	return distToEnd - other.distToEnd;
+	return distToGoal - other.distToGoal;
     }
 
     public int getDist(Location other){
@@ -34,6 +34,5 @@ public class Location implements Comparable<Location>{
 
     public static void main(String[]args){
 	Location l = new Location(1, 2, new Location(), 3, 4, false); 
-	System.out.println(l.get('S'));
     }
 }

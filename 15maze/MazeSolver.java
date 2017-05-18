@@ -1,6 +1,7 @@
 public class MazeSolver{
 
     private Maze board;
+    
 
 
     public MazeSolver(String filename){
@@ -17,11 +18,11 @@ public class MazeSolver{
     public void solve(int style){
 	//DFS
 	if(style == 0){
-
+	    
 	}
 	//BFS
 	if(style == 1){
-
+	    Frontier explore = new FrontierQueue();
 	}
 	//BestFirst
 	if(style == 2){
@@ -34,6 +35,6 @@ public class MazeSolver{
     }
 
     public String toString(){
-	return board;
+	return board.toString();
     }
 }

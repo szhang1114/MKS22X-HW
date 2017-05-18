@@ -2,8 +2,11 @@ import java.util.*;
 
 public class FrontierQueue implements Frontier{
 
-    private Queue<Location> que;
+    private ArrayList<Location> que;rn (distToGoal + distToEnd) - (other.
 
+    public FrontierQueue(){
+	que = new ArrayList<Location>();
+    }
     public void add(Location l){
 
     }
