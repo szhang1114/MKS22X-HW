@@ -35,6 +35,6 @@ public class MazeSolver{
     }
 
     public String toString(){
-	return board.toString();
+	return board.toString(3);
     }
 }
