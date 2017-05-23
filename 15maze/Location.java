@@ -5,7 +5,11 @@ public class Location implements Comparable<Location>{
     private Location previous;
     private boolean aStar;
 
-    public Location(){
+    public Location(int r, int c, Location previous, boolean aStar){
+	row = r;
+	col = c;
+	this.previous = previous;
+	this.aStar = aStar;
     }
     public Location(int r, int c, Location previous, int distToStart, int distToGoal, boolean aStar){
 	row = r;
@@ -27,12 +31,30 @@ public class Location implements Comparable<Location>{
 	return Math.abs(row - other.row) + Math.abs(col - other.col);
     }
 	
-    
-    public Location prev(){
-	return previous;
+    public int getDistToGoal(){
+	return distToGoal;
     }
 
-    public static void main(String[]args){
-	Location l = new Location(1, 2, new Location(), 3, 4, false); 
+    public int getDistToStart(){
+	return distToStart;
+    }
+    
+    public void setDistToGoal(int dist){
+	distToGoal = dist;
+    }
+
+    public void setDistToStart(int dist){
+	distToStart = dist;
+    }
+
+    public int getRow(){
+	return row;
+    }
+
+    public int getCol(){
+	return col;
+    }
+    public Location prev(){
+	return previous;
     }
 }

@@ -2,7 +2,7 @@ import java.util.*;
 
 public class FrontierQueue implements Frontier{
 
-    private ArrayList<Location> que;rn (distToGoal + distToEnd) - (other.
+    private ArrayList<Location> que;
 
     public FrontierQueue(){
 	que = new ArrayList<Location>();
@@ -13,6 +13,10 @@ public class FrontierQueue implements Frontier{
 
     public Location next(){
 	return new Location();
+    }
+
+    public int size(){
+	return 0;
     }
 
 }

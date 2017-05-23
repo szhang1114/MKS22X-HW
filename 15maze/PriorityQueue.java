@@ -9,6 +9,8 @@ public class PriorityQueue implements Frontier{
     public Location next(){
 	return remove;
     }
-    
+    public int size(){
+	return 0;
+    }
     
 }
