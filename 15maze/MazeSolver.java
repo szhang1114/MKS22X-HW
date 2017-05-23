@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class MazeSolver{
 
     private Maze board;
@@ -86,7 +84,7 @@ public class MazeSolver{
 		board.set(next.getRow(), next.getCol(), '?');
 	    }
 	    if(animate){
-		System.out.println(board.toString(5));
+		System.out.println(board.toString(100));
 	    }
 	}
     }
