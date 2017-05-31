@@ -9,6 +9,7 @@ public class Quiz2Redux{
 	ArrayList<String>words = new ArrayList<String>();
 	help( words, s, 0, "");
 	Collections.sort(words);
+	words.remove(0);
 	return words;
     }
   
